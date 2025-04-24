@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Form</title>
+  
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f1f3f4;
+    }
+    .login-container {
+      max-width: 400px;
+      margin: 100px auto;
+      padding: 30px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .login-container h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .form-label {
+      font-weight: bold;
+    }
+    .btn-primary {
+      background-color: #1a73e8;
+      border-color: #1a73e8;
+    }
+    .btn-primary:hover {
+      background-color: #1669c1;
+      border-color: #1669c1;
+    }
+    .alert {
+      display: none;
+      margin-bottom: 20px;
+    }
+  </style>
+
+  <script>
+    function validateForm() {
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+      var message = document.getElementById("message");
+      message.style.display = "none";
+      
+      // Username validation (Gmail check)
+      var usernameRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+      if (username.length > 20 || !username.match(usernameRegex)) {
+        message.style.display = "block";
+        message.className = "alert alert-danger";
+        message.innerHTML = "Enter a valid Gmail ID.";
+        return false;
+      }
+      
+      // Password validation
+      if (password.length < 15) {
+        message.style.display = "block";
+        message.innerHTML = "Password must be at least 15 characters.";
+        return false;
+      } 
+      
+      // Check if password contains both letters and numbers
+      var hasLetter = /[a-zA-Z]/.test(password);
+      var hasNumber = /[0-9]/.test(password);
+      if (!hasLetter || !hasNumber) {
+        message.style.display = "block";
+        message.innerHTML = "Password must contain both alphabets and numbers.";
+        return false;
+      }
+      
+      alert("Login Successful");
+      return true;
+    }
+  </script>
+</head>
+<body>
+
+  <div class="login-container">
+    <h2>Login</h2>
+    <div id="message" class="alert"></div>
+    
+    <form onsubmit="return validateForm()">
+     
+      <div>
+        <label for="username" class="form-label">Username</label>
+        <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+      </div>
+
+      
+      <div>
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+      </div>
+
+     
+      <button type="submit">Log In</button>
+
+     </form>
+  </div>
+
+</body>
+</html>
